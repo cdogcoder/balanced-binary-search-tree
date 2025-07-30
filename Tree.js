@@ -6,14 +6,18 @@ export default class Tree {
     }
 
     buildTree(array, start, end) {
+        let noDupArr = new Set(array);
+        noDupArr = Array.from(noDupArr);
+        start = 0
+        end = noDupArr.length-1;
         if (start > end) return null;
         else {
             const mid = Math.floor((start+end)/2);
-            const lengthOfLeft = array.slice(start,mid).length;
-            const lengthOfRight = array.slice(mid+1).length;
-            let leftSubTree = this.buildTree(array.slice(start, mid), start, lengthOfLeft-1);
-            let rightSubTree = this.buildTree(array.slice((mid+1)), start, lengthOfRight-1);
-            const newNode = new Node(array[mid], leftSubTree, rightSubTree);
+            const lengthOfLeft = noDupArr.slice(start,mid).length;
+            const lengthOfRight = noDupArr.slice(mid+1).length;
+            let leftSubTree = this.buildTree(noDupArr.slice(start, mid), start, lengthOfLeft-1);
+            let rightSubTree = this.buildTree(noDupArr.slice((mid+1)), start, lengthOfRight-1);
+            const newNode = new Node(noDupArr[mid], leftSubTree, rightSubTree);
             return newNode
         }
     }
@@ -34,7 +38,7 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 };
 
 const t = new Tree();
-const arr = [1,3,4,3,4,3,4,2,1,3,1,2,3,4,2]
+const arr = [1,3,4,3,4,3,4,2,1,3,1,2,3,4,2,5,29,12]
 t.root = t.buildTree(arr, 0, arr.length-1);
 
 console.log(t.root)
