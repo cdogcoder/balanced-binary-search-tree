@@ -9,8 +9,10 @@ export default class Tree {
         if (start > end) return null;
         else {
             const mid = Math.floor((start+end)/2);
-            let leftSubTree = this.buildTree(Array.from(array).slice(start, mid), start, mid-1);
-            let rightSubTree = this.buildTree(Array.from(array).slice((mid+1)), start, mid-1);
+            const lengthOfLeft = array.slice(start,mid).length;
+            const lengthOfRight = array.slice(mid+1).length;
+            let leftSubTree = this.buildTree(array.slice(start, mid), start, lengthOfLeft-1);
+            let rightSubTree = this.buildTree(array.slice((mid+1)), start, lengthOfRight-1);
             const newNode = new Node(array[mid], leftSubTree, rightSubTree);
             return newNode
         }
@@ -32,7 +34,8 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 };
 
 const t = new Tree();
-const arr = [1,2,3,4,5,6,7]
+const arr = [1,3,4,3,4,3,4,2,1,3,1,2,3,4,2]
 t.root = t.buildTree(arr, 0, arr.length-1);
 
+console.log(t.root)
 prettyPrint(t.root)
