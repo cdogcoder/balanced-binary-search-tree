@@ -5,18 +5,21 @@ export default class Tree {
         this.root = null;
     }
 
-    buildTree(array, start, end) {
-        let noDupArr = new Set(array);
-        noDupArr = Array.from(noDupArr);
-        start = 0
-        end = noDupArr.length-1;
+    buildTree(array, start, end, isBeginningCall = true) {
+        let noDupArr = array;
+        if (isBeginningCall) {
+            noDupArr = new Set(array);
+            noDupArr = Array.from(noDupArr).sort((a,b) => a-b);
+            start = 0;
+            end = noDupArr.length-1;
+        }
         if (start > end) return null;
         else {
             const mid = Math.floor((start+end)/2);
             const lengthOfLeft = noDupArr.slice(start,mid).length;
             const lengthOfRight = noDupArr.slice(mid+1).length;
-            let leftSubTree = this.buildTree(noDupArr.slice(start, mid), start, lengthOfLeft-1);
-            let rightSubTree = this.buildTree(noDupArr.slice((mid+1)), start, lengthOfRight-1);
+            let leftSubTree = this.buildTree(noDupArr.slice(start, mid), start, lengthOfLeft-1, false);
+            let rightSubTree = this.buildTree(noDupArr.slice((mid+1)), start, lengthOfRight-1, false);
             const newNode = new Node(noDupArr[mid], leftSubTree, rightSubTree);
             return newNode
         }
