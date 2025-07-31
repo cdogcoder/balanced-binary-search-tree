@@ -44,6 +44,35 @@ export default class Tree {
         else if (value == nodeToCompare.data) console.error("Value already exists in the tree.");
     }
 
+    delete(value) {
+        let prevNode = null;
+        let currNode = this.root;
+        while (currNode.data) {
+            if (value == currNode.data) {
+                break;
+            } else if (value > currNode.data) {
+                if (currNode.right) {
+                    prevNode = currNode;
+                    currNode = currNode.right;
+                }
+                else break; 
+            } else if (value < currNode.data) {
+                if (currNode.left) {
+                    prevNode = currNode;
+                    currNode = currNode.left;
+                }
+                else break;
+            } 
+        }
+        console.log(prevNode)
+        console.log(currNode)
+        if (value == currNode.data) {
+            if (currNode.left === null && currNode.right === null) {
+                if (prevNode.left.data == value) prevNode.left = null;
+                else if (prevNode.right.data == value) prevNode.right = null;
+            }
+        }
+    }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
@@ -60,9 +89,9 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 };
 
 const t = new Tree();
-const arr = [1,3,4,3,4,3,4,2,40,1,3,1,2,315, 197,199,198,6,0,11,200,4,2,5,29,12]
+const arr = [1,3,4,3,4,3,4,2,40,1,3,1,2, 197,199,198,6,0,11,200,4,2,5,29,12]
 t.root = t.buildTree(arr, 0, arr.length-1);
-t.insert(41)
+t.delete(2)
+t.delete(4)
 
-// console.log(t.root)
 prettyPrint(t.root)
