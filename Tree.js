@@ -92,8 +92,16 @@ export default class Tree {
 
                 currNode.data = nodeToDelete.data;
                 nodeToDelete.data = max;
-                if (prevNode.left && prevNode.left.data == value) prevNode.left = null;
-                else if (prevNode.right && prevNode.right.data == value) prevNode.right = null;
+                if (prevNode.left && prevNode.left.data == value) {
+                    if (currNode.left) prevNode.left = currNode.left;
+                    else if (currNode.right) prevNode.left = currNode.right;
+                    else prevNode.left = null;
+                }
+                else if (prevNode.right && prevNode.right.data == value) {
+                    if (currNode.left) prevNode.right = currNode.left;
+                    else if (currNode.right) prevNode.right = currNode.right;
+                    else prevNode.right = null;
+                }
             }
         }
     }
@@ -113,10 +121,8 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 };
 
 const t = new Tree();
-const arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+const arr = [60,65,70,75,80,85,95,100,110,115,120,125,135,150,175]
 t.root = t.buildTree(arr, 0, arr.length-1);
-t.delete(10)
-t.delete(12)
-t.delete(14)
+t.delete(75)
 
 prettyPrint(t.root)
