@@ -64,8 +64,8 @@ export default class Tree {
                 else break;
             } 
         }
-        console.log(prevNode)
-        console.log(currNode)
+        // console.log(prevNode)
+        // console.log(currNode)
         if (value == currNode.data) {
             if (currNode.left === null && currNode.right === null) {
                 if (prevNode.left.data == value) prevNode.left = null;
@@ -77,7 +77,23 @@ export default class Tree {
                 if (prevNode.left.data == value) prevNode.left = currNode.left;
                 else if (prevNode.right.data == value) prevNode.right = currNode.left;
             } else {
+                let nodeToDelete = currNode;
+                let max = currNode.left.data;
+                prevNode = currNode;
+                currNode = currNode.left;
+                
+                while (currNode.right) {
+                    if (currNode.right.data > max) {
+                        prevNode = currNode;
+                        currNode = currNode.right;
+                        max = currNode.data;
+                    }
+                }
 
+                currNode.data = nodeToDelete.data;
+                nodeToDelete.data = max;
+                if (prevNode.left && prevNode.left.data == value) prevNode.left = null;
+                else if (prevNode.right && prevNode.right.data == value) prevNode.right = null;
             }
         }
     }
@@ -97,7 +113,10 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 };
 
 const t = new Tree();
-const arr = [1,3,4,3,4,3,4,2,16,18,20,19,21,14,25,26,31,40,1,3,1,2, 315,22, 197,199,198,6,0,11,200,4,2,5,29,12]
+const arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
 t.root = t.buildTree(arr, 0, arr.length-1);
+t.delete(10)
+t.delete(12)
+t.delete(14)
 
 prettyPrint(t.root)
