@@ -70,6 +70,9 @@ export default class Tree {
             if (currNode.left === null && currNode.right === null) {
                 if (prevNode.left.data == value) prevNode.left = null;
                 else if (prevNode.right.data == value) prevNode.right = null;
+            } else if (currNode.left === null && currNode.right) {
+                if (prevNode.left.data == value) prevNode.left == currNode.right;
+                else if (prevNode.right.data == value) prevNode.right = currNode.right;
             }
         }
     }
@@ -89,9 +92,11 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 };
 
 const t = new Tree();
-const arr = [1,3,4,3,4,3,4,2,40,1,3,1,2, 197,199,198,6,0,11,200,4,2,5,29,12]
+const arr = [1,3,4,3,4,3,4,2,40,1,3,1,2, 315, 197,199,198,6,0,11,200,4,2,5,29,12]
 t.root = t.buildTree(arr, 0, arr.length-1);
 t.delete(2)
 t.delete(4)
+t.delete(5)
+t.delete(200)
 
 prettyPrint(t.root)
