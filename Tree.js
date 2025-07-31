@@ -25,6 +25,25 @@ export default class Tree {
         }
     }
 
+    insert(value) {
+        let nodeToCompare = this.root;
+        while (nodeToCompare.data) {
+            if (value > nodeToCompare.data) {
+                if (nodeToCompare.right) nodeToCompare = nodeToCompare.right;
+                else break; 
+            } else if (value < nodeToCompare.data) {
+                if (nodeToCompare.left) nodeToCompare = nodeToCompare.left;
+                else break;
+            } else if (value == nodeToCompare.data){
+                console.error("Value already exists in tree.");
+                return;
+            } 
+        }
+        if (value > nodeToCompare.data) nodeToCompare.right = new Node(value, null, null);
+        else if (value < nodeToCompare.data) nodeToCompare.left = new Node(value, null, null);
+        else if (value == nodeToCompare.data) console.error("Value already exists in the tree.");
+    }
+
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
@@ -41,8 +60,9 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 };
 
 const t = new Tree();
-const arr = [1,3,4,3,4,3,4,2,1,3,1,2,3,4,2,5,29,12]
+const arr = [1,3,4,3,4,3,4,2,40,1,3,1,2,315, 197,199,198,6,0,11,200,4,2,5,29,12]
 t.root = t.buildTree(arr, 0, arr.length-1);
+t.insert(41)
 
-console.log(t.root)
+// console.log(t.root)
 prettyPrint(t.root)
