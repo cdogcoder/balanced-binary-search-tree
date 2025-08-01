@@ -64,12 +64,13 @@ export default class Tree {
                 else break;
             } 
         }
-        // console.log(prevNode)
-        // console.log(currNode)
+      
         if (value == currNode.data) {
             if (currNode.left === null && currNode.right === null) {
-                if (prevNode.left.data == value) prevNode.left = null;
-                else if (prevNode.right.data == value) prevNode.right = null;
+                if (prevNode !== null) {
+                    if (prevNode.left.data == value) prevNode.left = null;
+                    else if (prevNode.right.data == value) prevNode.right = null;
+                } else this.root = null;
             } else if (currNode.left === null && currNode.right) {
                 if (prevNode.left.data == value) prevNode.left = currNode.right;
                 else if (prevNode.right.data == value) prevNode.right = currNode.right;
@@ -123,6 +124,22 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 const t = new Tree();
 const arr = [60,65,70,75,80,85,95,100,110,115,120,125,135,150,175]
 t.root = t.buildTree(arr, 0, arr.length-1);
+t.delete(175)
+t.delete(135)
+t.delete(120)
+t.delete(110)
+t.delete(95)
+t.delete(80)
+t.delete(70)
+t.delete(60)
+t.delete(150)
+t.delete(115)
+t.delete(85)
+t.delete(65)
+t.delete(125)
 t.delete(75)
+t.delete(100)
+
+
 
 prettyPrint(t.root)
