@@ -45,6 +45,7 @@ export default class Tree {
     }
 
     delete(value) {
+        if (!value) return;
         let prevNode = null;
         let currNode = this.root;
         while (currNode.data) {
@@ -128,16 +129,6 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 const t = new Tree();
 const arr = [60,65,70,75,80,85,95,100,110,115,120,125,135,150,175]
 t.root = t.buildTree(arr, 0, arr.length-1);
-t.delete(135)
-t.delete(125)
-t.delete(120)
-t.delete(110)
-t.delete(100)
-t.delete(115)
-t.delete(150)
-t.delete(95)
-t.delete(175)
-t.delete(85)
 
 
 
