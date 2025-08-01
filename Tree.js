@@ -111,6 +111,25 @@ export default class Tree {
             }
         }
     }
+
+    find(value) {
+        let currNode = this.root;
+        while (currNode.data) {
+            if (value == currNode.data) {
+                return value;
+            } else if (value > currNode.data) {
+                if (currNode.right) {
+                    currNode = currNode.right;
+                }
+                else return null; 
+            } else if (value < currNode.data) {
+                if (currNode.left) {
+                    currNode = currNode.left;
+                }
+                else return null;
+            } 
+        }
+    }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
@@ -129,7 +148,9 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 const t = new Tree();
 const arr = [60,65,70,75,80,85,95,100,110,115,120,125,135,150,175]
 t.root = t.buildTree(arr, 0, arr.length-1);
-
+console.log(t.find(2))
+console.log(t.find(125))
+console.log(t.find(124))
 
 
 prettyPrint(t.root)
