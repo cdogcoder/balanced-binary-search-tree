@@ -177,6 +177,12 @@ export default class Tree {
         if (currNode && currNode.right) this.postOrderForEach(callback, currNode.right);
         if (currNode) callback(currNode.data);
     }
+
+    height(value) {
+        if (this.find(value)) {
+            return this.levelOrderForEachIter(() => {}, [[this.find(value)]])
+        }
+    }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
@@ -202,7 +208,8 @@ t.root = t.buildTree(arr, 0, arr.length-1);
 // console.log(t.find(2))
 // console.log(t.find(125))
 // console.log(t.find(124))
-console.log(t.levelOrderForEachIter(printNums))
+// console.log(t.levelOrderForEachIter(printNums))
+console.log(t.height(110))
 // t.levelOrderForEachRec(printNums)
 // t.inOrderForEach(printNums)
 // t.preOrderForEach(printNums)
