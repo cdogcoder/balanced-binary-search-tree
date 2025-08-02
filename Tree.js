@@ -116,7 +116,7 @@ export default class Tree {
         let currNode = this.root;
         while (currNode.data) {
             if (value == currNode.data) {
-                return value;
+                return currNode;
             } else if (value > currNode.data) {
                 if (currNode.right) {
                     currNode = currNode.right;
@@ -189,14 +189,14 @@ function printNums(num) {
 }
 
 const t = new Tree();
-const arr = [60,65,70,75,80,85,95,100,110,115,120,125,135,150,175]
+const arr = [60,65,70,75,80,85,95,100,110,115,120,125,135,150,175,200]
 t.root = t.buildTree(arr, 0, arr.length-1);
 // console.log(t.find(2))
 // console.log(t.find(125))
 // console.log(t.find(124))
-// t.levelOrderForEachIter(printNums)
+console.log(t.levelOrderForEachIter(printNums))
 // t.levelOrderForEachRec(printNums)
 // t.inOrderForEach(printNums)
 // t.preOrderForEach(printNums)
-t.postOrderForEach(printNums)
+// t.postOrderForEach(printNums)
 prettyPrint(t.root)
