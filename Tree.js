@@ -155,13 +155,19 @@ export default class Tree {
     inOrderForEach(callback, currNode = this.root) {
         if (currNode && currNode.left) this.inOrderForEach(callback, currNode.left);
         if (currNode) callback(currNode.data);
-        if (currNode && currNode.right) this.inOrderForEach(callback, currNode.right)
+        if (currNode && currNode.right) this.inOrderForEach(callback, currNode.right);
     }
 
     preOrderForEach(callback, currNode = this.root) {
         if (currNode) callback(currNode.data);
         if (currNode && currNode.left) this.preOrderForEach(callback, currNode.left);
-        if (currNode && currNode.right) this.preOrderForEach(callback, currNode.right)
+        if (currNode && currNode.right) this.preOrderForEach(callback, currNode.right);
+    }
+
+    postOrderForEach(callback, currNode = this.root) {
+        if (currNode && currNode.left) this.postOrderForEach(callback, currNode.left);
+        if (currNode && currNode.right) this.postOrderForEach(callback, currNode.right);
+        if (currNode) callback(currNode.data);
     }
 }
 
@@ -191,5 +197,6 @@ t.root = t.buildTree(arr, 0, arr.length-1);
 // t.levelOrderForEachIter(printNums)
 // t.levelOrderForEachRec(printNums)
 // t.inOrderForEach(printNums)
-t.preOrderForEach(printNums)
+// t.preOrderForEach(printNums)
+t.postOrderForEach(printNums)
 prettyPrint(t.root)
