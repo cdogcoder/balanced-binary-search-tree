@@ -131,13 +131,21 @@ export default class Tree {
         }
     }
 
-    levelOrderForEachIter(callback, queue = [this.root]) {
+    levelOrderForEachIter(callback, queue = [[this.root]], count = 0) {
         while (queue.length) {
-            callback(queue[0])
-            if (queue[0].left) queue.push(queue[0].left)
-            if (queue[0].right) queue.push(queue[0].right)
+            const nextLevel = [];
+            for (let i = 0; i < queue[0].length; i++) {
+                callback(queue[0][i]);
+                if (queue[0][i].left) nextLevel.push(queue[0][i].left)
+                if (queue[0][i].right) nextLevel.push(queue[0][i].right)
+            }
+            if (nextLevel.length) {
+                count++;
+                queue.push(nextLevel);
+            }
             queue.shift();
         }
+        return count;
     }
 
     levelOrderForEachRec(callback, queue = [this.root]) {
