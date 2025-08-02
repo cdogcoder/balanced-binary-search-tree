@@ -130,6 +130,15 @@ export default class Tree {
             } 
         }
     }
+
+    levelOrderForEach(callback, queue = [this.root]) {
+        while (queue.length) {
+            callback(queue[0])
+            if (queue[0].left) queue.push(queue[0].left)
+            if (queue[0].right) queue.push(queue[0].right)
+            queue.shift();
+        }
+    }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
@@ -145,12 +154,16 @@ function prettyPrint(node, prefix = '', isLeft = true) {
     }
 };
 
+function printNums(num) {
+    console.log(num);
+}
+
 const t = new Tree();
 const arr = [60,65,70,75,80,85,95,100,110,115,120,125,135,150,175]
 t.root = t.buildTree(arr, 0, arr.length-1);
 console.log(t.find(2))
 console.log(t.find(125))
 console.log(t.find(124))
-
+t.levelOrderForEach(printNums)
 
 prettyPrint(t.root)
