@@ -131,13 +131,25 @@ export default class Tree {
         }
     }
 
-    levelOrderForEach(callback, queue = [this.root]) {
+    levelOrderForEachIter(callback, queue = [this.root]) {
         while (queue.length) {
             callback(queue[0])
             if (queue[0].left) queue.push(queue[0].left)
             if (queue[0].right) queue.push(queue[0].right)
             queue.shift();
         }
+    }
+
+    levelOrderForEachRec(callback, queue = [this.root]) {
+        if (!queue.length) return;
+        else {
+            callback(queue[0])
+            if (queue[0].left) queue.push(queue[0].left)
+            if (queue[0].right) queue.push(queue[0].right)
+            queue.shift();
+            this.levelOrderForEachIter(callback, queue)
+        }
+
     }
 }
 
@@ -164,6 +176,6 @@ t.root = t.buildTree(arr, 0, arr.length-1);
 console.log(t.find(2))
 console.log(t.find(125))
 console.log(t.find(124))
-t.levelOrderForEach(printNums)
-
+t.levelOrderForEachIter(printNums)
+t.levelOrderForEachRec(printNums)
 prettyPrint(t.root)
