@@ -151,6 +151,12 @@ export default class Tree {
         }
 
     }
+
+    inOrderForEach(callback, currNode = this.root) {
+        if (currNode && currNode.left) this.inOrderForEach(callback, currNode.left);
+        if (currNode) callback(currNode.data)
+        if (currNode && currNode.right) this.inOrderForEach(callback, currNode.right)
+    }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
@@ -173,9 +179,10 @@ function printNums(num) {
 const t = new Tree();
 const arr = [60,65,70,75,80,85,95,100,110,115,120,125,135,150,175]
 t.root = t.buildTree(arr, 0, arr.length-1);
-console.log(t.find(2))
-console.log(t.find(125))
-console.log(t.find(124))
-t.levelOrderForEachIter(printNums)
-t.levelOrderForEachRec(printNums)
+// console.log(t.find(2))
+// console.log(t.find(125))
+// console.log(t.find(124))
+// t.levelOrderForEachIter(printNums)
+// t.levelOrderForEachRec(printNums)
+t.inOrderForEach(printNums)
 prettyPrint(t.root)
