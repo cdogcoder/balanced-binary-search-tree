@@ -183,6 +183,21 @@ export default class Tree {
             return this.levelOrderForEachIter(() => {}, [[this.find(value)]])
         }
     }
+
+    depth(value) {
+        if (this.find(value)) {
+            let currNode = this.root;
+            let count = 0;
+            while (currNode) {
+                if (value < currNode.data) currNode = currNode.left;
+                else if (value > currNode.data) currNode = currNode.right;
+                else break;
+                count++;
+            }
+            return count;
+        }
+        return null;
+    }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
@@ -209,7 +224,9 @@ t.root = t.buildTree(arr, 0, arr.length-1);
 // console.log(t.find(125))
 // console.log(t.find(124))
 // console.log(t.levelOrderForEachIter(printNums))
-console.log(t.height(110))
+console.log(t.height(100))
+console.log(t.height(175))
+console.log(t.depth(175))
 // t.levelOrderForEachRec(printNums)
 // t.inOrderForEach(printNums)
 // t.preOrderForEach(printNums)
