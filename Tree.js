@@ -157,7 +157,6 @@ export default class Tree {
             queue.shift();
             this.levelOrderForEachIter(callback, queue)
         }
-
     }
 
     inOrderForEach(callback, currNode = this.root) {
@@ -198,6 +197,24 @@ export default class Tree {
         }
         return null;
     }
+
+    isBalanced(node = this.root) {
+        if (node.left && node.right) {
+            if (Math.abs(this.height(node.left.data) - this.height(node.right.data)) <= 1) {
+                return this.isBalanced(node.left) && this.isBalanced(node.right);
+            } else {
+                return false;
+            }
+        } else if (node.left && !node.right) {
+            if (this.height(node.left.data) == 0) return true;
+            else return false;
+        } else if (!node.left && node.right) {
+            if (this.height(node.right.data) == 0) return true;
+            else return false;
+        } else {
+            return true;
+        }
+    }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
@@ -218,15 +235,18 @@ function printNums(num) {
 }
 
 const t = new Tree();
-const arr = [60,65,70,75,80,85,95,100,110,115,120,125,135,150,175,200]
+const arr = [1,2,3,4,5,6,7,8]
 t.root = t.buildTree(arr, 0, arr.length-1);
 // console.log(t.find(2))
 // console.log(t.find(125))
 // console.log(t.find(124))
-// console.log(t.levelOrderForEachIter(printNums))
+console.log(t.levelOrderForEachIter(printNums))
 console.log(t.height(100))
-console.log(t.height(175))
+console.log(t.height(200))
 console.log(t.depth(175))
+console.log(t.delete(5))
+// console.log(t.delete(2))
+console.log(t.isBalanced())
 // t.levelOrderForEachRec(printNums)
 // t.inOrderForEach(printNums)
 // t.preOrderForEach(printNums)
