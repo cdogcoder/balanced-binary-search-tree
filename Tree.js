@@ -197,6 +197,7 @@ export default class Tree {
         if (this.find(value)) {
             return this.levelOrderForEachIter(() => {}, [[this.find(value)]])
         }
+        return null;
     }
 
     depth(value) {
