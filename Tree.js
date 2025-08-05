@@ -148,6 +148,10 @@ export default class Tree {
     }
 
     levelOrderForEachIter(callback, queue = [[this.root]], count = 0) {
+        if (!callback) {
+            console.error("No callback was provided.");
+            return;
+        }
         while (queue.length) {
             const nextLevel = [];
             for (let i = 0; i < queue[0].length; i++) {
@@ -165,6 +169,10 @@ export default class Tree {
     }
 
     levelOrderForEachRec(callback, queue = [this.root]) {
+        if (!callback) {
+            console.error("No callback was provided.");
+            return;
+        }
         if (!queue.length) return;
         else {
             callback(queue[0])
@@ -176,18 +184,30 @@ export default class Tree {
     }
 
     inOrderForEach(callback, currNode = this.root) {
+        if (!callback) {
+            console.error("No callback was provided.");
+            return;
+        }
         if (currNode && currNode.left) this.inOrderForEach(callback, currNode.left);
         if (currNode) callback(currNode.data);
         if (currNode && currNode.right) this.inOrderForEach(callback, currNode.right);
     }
 
     preOrderForEach(callback, currNode = this.root) {
+        if (!callback) {
+            console.error("No callback was provided.");
+            return;
+        }
         if (currNode) callback(currNode.data);
         if (currNode && currNode.left) this.preOrderForEach(callback, currNode.left);
         if (currNode && currNode.right) this.preOrderForEach(callback, currNode.right);
     }
 
     postOrderForEach(callback, currNode = this.root) {
+        if (!callback) {
+            console.error("No callback was provided.");
+            return;
+        }
         if (currNode && currNode.left) this.postOrderForEach(callback, currNode.left);
         if (currNode && currNode.right) this.postOrderForEach(callback, currNode.right);
         if (currNode) callback(currNode.data);
