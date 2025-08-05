@@ -125,6 +125,10 @@ export default class Tree {
     }
 
     find(value) {
+        if (!value) {
+            console.error("No value was provided.");
+            return;
+        }
         let currNode = this.root;
         while (currNode.data) {
             if (value == currNode.data) {
