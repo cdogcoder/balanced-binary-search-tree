@@ -194,6 +194,10 @@ export default class Tree {
     }
 
     height(value) {
+        if (!value) {
+            console.error("No value was provided.");
+            return;
+        }
         if (this.find(value)) {
             return this.levelOrderForEachIter(() => {}, [[this.find(value)]])
         }
@@ -201,6 +205,10 @@ export default class Tree {
     }
 
     depth(value) {
+        if (!value) {
+            console.error("No value was provided.");
+            return;
+        }
         if (this.find(value)) {
             let currNode = this.root;
             let count = 0;
