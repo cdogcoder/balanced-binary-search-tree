@@ -215,6 +215,13 @@ export default class Tree {
             return true;
         }
     }
+
+    rebalance(array = []) {
+        this.inOrderForEach((node) => {
+            array.push(node)
+        })
+        this.root = this.buildTree(array)
+    }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
@@ -251,4 +258,5 @@ console.log(t.isBalanced())
 // t.inOrderForEach(printNums)
 // t.preOrderForEach(printNums)
 // t.postOrderForEach(printNums)
+t.rebalance()
 prettyPrint(t.root)
