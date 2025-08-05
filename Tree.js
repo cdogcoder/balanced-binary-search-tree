@@ -21,7 +21,9 @@ export default class Tree {
             let leftSubTree = this.buildTree(noDupArr.slice(start, mid), start, lengthOfLeft-1, false);
             let rightSubTree = this.buildTree(noDupArr.slice((mid+1)), start, lengthOfRight-1, false);
             const newNode = new Node(noDupArr[mid], leftSubTree, rightSubTree);
-            return newNode
+            if (isBeginningCall) {
+                this.root = newNode;
+            } return newNode;
         }
     }
 
@@ -243,7 +245,7 @@ function printNums(num) {
 
 const t = new Tree();
 const arr = [1,2,3,4,5,6,7,8]
-t.root = t.buildTree(arr, 0, arr.length-1);
+t.buildTree(arr, 0, arr.length-1);
 // console.log(t.find(2))
 // console.log(t.find(125))
 // console.log(t.find(124))
