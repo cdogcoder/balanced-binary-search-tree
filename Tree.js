@@ -28,22 +28,22 @@ export default class Tree {
     }
 
     insert(value) {
-        let nodeToCompare = this.root;
-        while (nodeToCompare.data) {
-            if (value > nodeToCompare.data) {
-                if (nodeToCompare.right) nodeToCompare = nodeToCompare.right;
+        let currNode = this.root;
+        while (currNode.data) {
+            if (value > currNode.data) {
+                if (currNode.right) currNode = currNode.right;
                 else break; 
-            } else if (value < nodeToCompare.data) {
-                if (nodeToCompare.left) nodeToCompare = nodeToCompare.left;
+            } else if (value < currNode.data) {
+                if (currNode.left) currNode = currNode.left;
                 else break;
-            } else if (value == nodeToCompare.data){
+            } else if (value == currNode.data){
                 console.error("Value already exists in tree.");
                 return;
             } 
         }
-        if (value > nodeToCompare.data) nodeToCompare.right = new Node(value, null, null);
-        else if (value < nodeToCompare.data) nodeToCompare.left = new Node(value, null, null);
-        else if (value == nodeToCompare.data) console.error("Value already exists in the tree.");
+        if (value > currNode.data) currNode.right = new Node(value, null, null);
+        else if (value < currNode.data) currNode.left = new Node(value, null, null);
+        else if (value == currNode.data) console.error("Value already exists in the tree.");
     }
 
     delete(value) {
