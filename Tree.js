@@ -51,7 +51,13 @@ export default class Tree {
     }
 
     delete(value) {
-        if (!value) return;
+        if (!value) {
+            console.error("No value was provided");
+            return;
+        } else if (!this.find(value)) {
+            console.error("The value does not exist in the tree.");
+            return;
+        }
         let prevNode = null;
         let currNode = this.root;
         while (currNode.data) {
