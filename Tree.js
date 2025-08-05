@@ -224,20 +224,21 @@ export default class Tree {
         })
         this.root = this.buildTree(array)
     }
+
+    printTree(node, prefix = '', isLeft = true) {
+        if (node === null) {
+            return;
+        }
+        if (node.right !== null) {
+            this.printTree(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+        }
+        console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+        if (node.left !== null) {
+            this.printTree(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+        }
+    }
 }
 
-function prettyPrint(node, prefix = '', isLeft = true) {
-    if (node === null) {
-        return;
-    }
-    if (node.right !== null) {
-        prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
-    }
-    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
-    if (node.left !== null) {
-        prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
-    }
-};
 
 function printNums(num) {
     console.log(num);
@@ -246,19 +247,20 @@ function printNums(num) {
 const t = new Tree();
 const arr = [1,2,3,4,5,6,7,8]
 t.buildTree(arr, 0, arr.length-1);
+t.printTree(t.root)
 // console.log(t.find(2))
 // console.log(t.find(125))
 // console.log(t.find(124))
-console.log(t.levelOrderForEachIter(printNums))
-console.log(t.height(100))
-console.log(t.height(200))
-console.log(t.depth(175))
-console.log(t.delete(5))
+// console.log(t.levelOrderForEachIter(printNums))
+// console.log(t.height(100))
+// console.log(t.height(200))
+// console.log(t.depth(175))
+// console.log(t.delete(5))
 // console.log(t.delete(2))
-console.log(t.isBalanced())
+// console.log(t.isBalanced())
 // t.levelOrderForEachRec(printNums)
 // t.inOrderForEach(printNums)
 // t.preOrderForEach(printNums)
 // t.postOrderForEach(printNums)
-t.rebalance()
-prettyPrint(t.root)
+// t.rebalance()
+// prettyPrint(t.root)
