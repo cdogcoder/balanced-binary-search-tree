@@ -28,6 +28,10 @@ export default class Tree {
     }
 
     insert(value) {
+        if (!value) {
+            console.error("No valid was provided");
+            return;
+        }
         let currNode = this.root;
         while (currNode.data) {
             if (value > currNode.data) {
